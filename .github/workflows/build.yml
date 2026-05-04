@@ -31,8 +31,8 @@ jobs:
       run: |
         git clone --depth=1 https://github.com/Ammar64/Sharing
         cd Sharing
-        sed -i 's/applicationId "com.ammar.sharing"/applicationId "com.ammar.sharing.debug.latest"/g' app/build.gradle
-        sed -i 's/Sharing/Sharing debug/g' app/src/main/res/values/strings.xml
+        sed -i 's/applicationId = "com.ammar.sharing"/applicationId = "com.ammar.sharing.debug.latest"/g' app/build.gradle
+        sed -i 's/sharing/sharing debug/g' app/src/main/res/values/strings.xml
         pnpm install --prefix ./web
         ./gradlew assembleRelease
         VERSION_NAME=$(grep '^versionName=' app/version.txt | cut -d'=' -f2)
