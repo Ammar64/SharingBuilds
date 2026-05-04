@@ -17,6 +17,12 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 17
+    - name: Install required packages
+      run: |
+        sudo apt update -y
+        sudo apt install -y npm node-typescript rsync apksigner
+        sudo npm install -g pnpm
+        
     - name: Set up keystore
       run: |
         echo "${{ secrets.KEYSTORE_BASE64 }}" > keystore.txt
