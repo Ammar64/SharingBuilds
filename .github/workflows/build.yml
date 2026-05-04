@@ -38,7 +38,7 @@ jobs:
         VERSION_NAME=$(grep '^versionName=' app/version.txt | cut -d'=' -f2)
         echo "VERSION_NAME=${VERSION_NAME}" >> $GITHUB_ENV
         apksigner sign --v4-signing-enabled --ks ../keystore.jks --ks-pass pass:${{ secrets.KEYSTORE_PASS }} --key-pass pass:${{ secrets.KEY_PASS }} app/build/outputs/apk/release/app-release-unsigned.apk
-        mv app/build/outputs/apk/release/app-release-unsigned.apk android/build/outputs/apk/release/Sharing_debug-${VERSION_NAME}.apk
+        mv app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/Sharing_debug-${VERSION_NAME}.apk
     - name: Upload Android artifacts
       uses: svenstaro/upload-release-action@v2
       with:
