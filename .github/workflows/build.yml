@@ -20,7 +20,7 @@ jobs:
     - name: Install required packages
       run: |
         sudo apt update -y
-        sudo apt install -y npm node-typescript rsync apksigner
+        sudo apt install -y npm node-typescript apksigner
         sudo npm install -g pnpm
         
     - name: Set up keystore
@@ -35,7 +35,7 @@ jobs:
         sed -i 's/Sharing/Sharing debug/g' app/src/main/res/values/strings.xml
         pnpm install --prefix ./web
         ./gradlew assembleRelease
-        VERSION_NAME=$(grep '^versionName=' version.txt | cut -d'=' -f2)
+        VERSION_NAME=$(grep '^versionName=' app/version.txt | cut -d'=' -f2)
         echo "VERSION_NAME=${VERSION_NAME}" >> $GITHUB_ENV
         apksigner sign --v4-signing-enabled --ks ../keystore.jks --ks-pass pass:${secrets.KEYSTORE_PASS} --key-pass pass:${secrets.KEY_PASS} app/build/outputs/apk/release/app-release-unsigned.apk
         mv app/build/outputs/apk/release/app-release-unsigned.apk android/build/outputs/apk/release/Sharing_debug-${VERSION_NAME}.apk
