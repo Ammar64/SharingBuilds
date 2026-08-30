@@ -24,6 +24,8 @@ jobs:
       run: |
         sudo apt update -y
         sudo apt install -y apksigner
+        sudo apt install -y npm
+        sudo npm install -g pnpm
         
     - name: Set up keystore
       run: |
